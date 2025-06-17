@@ -1,0 +1,22 @@
+comandos
+
+cd C:\Projetos\VerificadorTransacoes
+
+mvn spring-boot:run
+
+http://localhost:8080/
+
++
+{
+  "chavePix": "lucas@pix",
+  "valor": 120.00,
+  "confiavel": true,
+  "data": "2025-06-03T18:35:00"
+}
+
+-
+{
+  "chavePix": "lucas@pix",
+  "motivo": "Produto não entregue",
+  "data": "2025-06-03T18:30:00"
+}
