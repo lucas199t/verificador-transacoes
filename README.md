@@ -55,6 +55,26 @@ Demonstrar, de forma prática, um sistema capaz de receber dados de transações
 
 ---
 
+### 🖥️ Execução do Frontend (site)
+
+A aplicação web está localizada na pasta `frontend/` dentro deste repositório.
+
+#### Como rodar o site localmente:
+
+1. Navegue até a pasta:
+```bash
+cd frontend
+```
+
+2. Abra o arquivo `bra_bank_home.html` no navegador:
+- Clique duas vezes sobre o `bra_bank_home.html`, ou
+- Execute no terminal:
+```bash
+start bra_bank_home.html
+```
+
+---
+
 ## ✅ Contribuição
 Pull Requests são bem-vindos! Para grandes mudanças, abra uma issue primeiro para discutir o que você gostaria de modificar.
 
