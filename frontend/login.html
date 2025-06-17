@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Bra Bank</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(145deg, #e0f0ff, #ffffff);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .phone {
+      width: 360px;
+      min-height: 640px;
+      background-color: #fff;
+      border-radius: 44px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 20px 30px 20px;
+      text-align: center;
+      position: relative;
+    }
+    .status-bar {
+      width: 92%;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      background: #111;
+      border-top-left-radius: 44px;
+      border-top-right-radius: 44px;
+      font-size: 15px;
+      color: #fff;
+      letter-spacing: 1px;
+      font-weight: 600;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      user-select: none;
+    }
+    .status-icons {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+    .title {
+      margin-top: 50px;
+      margin-bottom: 25px;
+      color: #0070f3;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 90%;
+      padding: 13px;
+      border-radius: 25px;
+      border: 1.5px solid #b5c9e3;
+      font-size: 16px;
+      outline: none;
+      margin-top: 0;
+      transition: border-color 0.2s;
+    }
+    input:focus {
+      border-color: #0070f3;
+    }
+    .btn-login {
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      border-radius: 28px;
+      width: 92%;
+      padding: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-login:hover {
+      background: #0059c1;
+    }
+    .back-link {
+      color: #0070f3;
+      margin-top: 8px;
+      display: block;
+      font-size: 15px;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: #003b7a;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span id="currentTime">12:00</span>
+      <span class="status-icons">
+        <svg width="20" height="14" viewBox="0 0 20 14"><rect x="0" y="2" width="16" height="10" rx="2" fill="#fff"/><rect x="17" y="5" width="2" height="4" rx="1" fill="#aaa"/></svg>
+        <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="#fff" stroke-width="2"/><rect x="8" y="4" width="2" height="6" rx="1" fill="#fff"/></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="8" rx="2" fill="#fff"/><rect x="20" y="10" width="2" height="4" rx="1" fill="#aaa"/></svg>
+      </span>
+    </div>
+    <div class="title">Login</div>
+    <form id="loginForm">
+      <input type="email" name="email" placeholder="E-mail" required />
+      <input type="password" name="senha" placeholder="Senha" required />
+      <button type="submit" class="btn-login">Entrar</button>
+    </form>
+    <a href="bra_bank_home.html" class="back-link">Voltar ao início</a>
+  </div>
+  <script>
+    // Atualiza o horário no status bar
+    function updateClock() {
+      const now = new Date();
+      let h = String(now.getHours()).padStart(2, '0');
+      let m = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('currentTime').textContent = h + ':' + m;
+    }
+    updateClock();
+    setInterval(updateClock, 10000);
+
+    // Script de login (AJUSTE o endpoint abaixo para o do seu backend se precisar!)
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const email = this.email.value;
+      const senha = this.senha.value;
+
+      const data = { email, senha };
+
+      try {
+        const response = await fetch('http://localhost:8080/vendedor/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          alert('Login realizado com sucesso!');
+          window.location.href = 'index.html';
+        } else {
+          const erro = await response.text();
+          alert('Erro ao fazer login: ' + erro);
+        }
+      } catch (err) {
+        alert('Erro de conexão: ' + err);
+      }
+    });
+  </script>
+</body>
+</html>

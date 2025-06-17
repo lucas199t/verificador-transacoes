@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Área Pix | Bra Bank</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(145deg, #e0f0ff, #ffffff);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      min-height: 100vh;
+    }
+    .phone {
+      width: 360px;
+      height: 640px;
+      background-color: #fff;
+      border-radius: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      padding: 0 0 0 0;
+      box-sizing: border-box;
+      animation: fadeIn 0.6s cubic-bezier(.36,1.2,.47,.95);
+      overflow: hidden;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .status-bar {
+      width: 92%;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      background: #111;
+      border-top-left-radius: 40px;
+      border-top-right-radius: 40px;
+      font-size: 15px;
+      color: #fff;
+      letter-spacing: 1px;
+      font-weight: 600;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      user-select: none;
+    }
+    .status-icons {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+    .main-content {
+      margin-top: 55px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      flex: 1;
+      justify-content: flex-start;
+      padding: 22px 22px 0 22px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+    .title {
+      color: #007bff;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    label {
+      font-weight: 600;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 7px;
+      align-self: flex-start;
+    }
+    input {
+      width: 100%;
+      padding: 13px;
+      border-radius: 18px;
+      border: 1.5px solid #b5c9e3;
+      font-size: 16px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    .btn-pix, .btn-create-pix, .btn-nav {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      border-radius: 18px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0,123,255,0.10);
+      transition: background 0.2s, transform 0.2s;
+      display: block;
+    }
+    .btn-pix, .btn-create-pix {
+      background: linear-gradient(90deg, #007bff, #50c1ff);
+      color: #fff;
+    }
+    .btn-pix:hover, .btn-create-pix:hover {
+      background: linear-gradient(90deg, #0056b3, #50c1ff);
+      transform: scale(1.02);
+    }
+    .btn-nav {
+      background-color: #eee;
+      color: #222;
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: 8px;
+      margin-bottom: 0;
+      box-shadow: none;
+      transition: background 0.2s;
+    }
+    .btn-nav:hover {
+      background-color: #d6e2ef;
+    }
+    .result, .result-create {
+      text-align: center;
+      margin-bottom: 14px;
+      font-size: 17px;
+      min-height: 24px;
+      color: #444;
+      width: 100%;
+      word-break: break-word;
+    }
+    .area-extra-title {
+      margin-top: 10px;
+      color: #007bff;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      letter-spacing: 0.2px;
+      text-align: center;
+      width: 100%;
+    }
+    hr {
+      width: 90%;
+      border: 0;
+      border-top: 1.5px solid #e0e0e0;
+      margin: 14px 0 12px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span id="currentTime">12:00</span>
+      <span class="status-icons">
+        <svg width="20" height="14" viewBox="0 0 20 14"><rect x="0" y="2" width="16" height="10" rx="2" fill="#fff"/><rect x="17" y="5" width="2" height="4" rx="1" fill="#aaa"/></svg>
+        <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="#fff" stroke-width="2"/><rect x="8" y="4" width="2" height="6" rx="1" fill="#fff"/></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="8" rx="2" fill="#fff"/><rect x="20" y="10" width="2" height="4" rx="1" fill="#aaa"/></svg>
+      </span>
+    </div>
+    <div class="main-content">
+      <div class="title">Área Pix</div>
+      <label for="chavePix">Chave Pix do destinatário</label>
+      <input type="text" id="chavePix" placeholder="Digite a chave Pix" />
+
+      <label for="valor">Valor a enviar</label>
+      <input type="number" id="valor" placeholder="Valor (R$)" min="0.01" step="0.01" />
+
+      <button class="btn-pix" onclick="registrar()">Enviar Pix</button>
+      <div class="result" id="resposta"></div>
+
+      <hr>
+
+      <div class="area-extra-title">Criar nova chave Pix</div>
+      <input type="text" id="nomeUsuario" placeholder="Nome do titular" autocomplete="off" />
+      <input type="text" id="novaChavePix" placeholder="Nova chave Pix (CPF, e-mail ou telefone)" autocomplete="off" />
+      <button class="btn-create-pix" onclick="criarChavePix()">Cadastrar Chave Pix</button>
+      <div class="result-create" id="respostaCriar"></div>
+
+      <button class="btn-nav" onclick="location.href='index.html'">Voltar ao Início</button>
+    </div>
+  </div>
+  <script>
+    // Atualiza a hora da barra do "celular"
+    function updateClock() {
+      const now = new Date();
+      let h = String(now.getHours()).padStart(2, '0');
+      let m = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('currentTime').textContent = h + ':' + m;
+    }
+    updateClock();
+    setInterval(updateClock, 10000);
+
+    // Função única para enviar Pix
+    function registrar() {
+      const chavePix = document.getElementById('chavePix').value.trim().toLowerCase();
+      const valor = parseFloat(document.getElementById('valor').value);
+      const resposta = document.getElementById('resposta');
+
+      if (!chavePix || isNaN(valor) || valor <= 0) {
+        resposta.innerHTML = "Preencha corretamente os campos.";
+        return;
+      }
+
+      fetch(`http://localhost:8080/usuario/chave/${chavePix}`)
+        .then(res => {
+          if (!res.ok) throw new Error("Chave Pix não encontrada.");
+          return fetch('http://localhost:8080/transacao', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chavePix: chavePix,
+              valor: valor,
+              confiavel: true,
+              data: new Date().toISOString()
+            })
+          });
+        })
+        .then(res => {
+          if (!res.ok) throw new Error("Erro ao enviar Pix.");
+          return fetch(`http://localhost:8080/score/${chavePix}`);
+        })
+        .then(res => {
+          if (!res.ok) throw new Error("Erro ao buscar score.");
+          return res.text();
+        })
+        .then(score => {
+          resposta.innerHTML = `✅ Pix enviado.<br> Score atualizado: <strong>${score}</strong>`;
+        })
+        .catch((err) => {
+          resposta.innerHTML = `❌ ${err.message}`;
+        });
+    }
+
+    // Função para criar nova chave Pix
+    function criarChavePix() {
+      const nomeUsuario = document.getElementById('nomeUsuario').value.trim();
+      const novaChavePix = document.getElementById('novaChavePix').value.trim();
+      const respostaCriar = document.getElementById('respostaCriar');
+
+      if (!nomeUsuario || !novaChavePix) {
+        respostaCriar.innerHTML = "Preencha todos os campos para criar a chave Pix.";
+        return;
+      }
+
+      fetch('http://localhost:8080/usuario', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: nomeUsuario,
+          chavePix: novaChavePix
+        })
+      })
+      .then(response => {
+        if (!response.ok) throw new Error();
+        respostaCriar.innerHTML = "✅ Chave Pix criada com sucesso!";
+      })
+      .catch(() => {
+        respostaCriar.innerHTML = "❌ Não foi possível criar a chave Pix. (Já existe ou erro no servidor)";
+      });
+    }
+  </script>
+</body>
+</html>

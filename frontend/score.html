@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Consultar Score | Bra Bank</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(145deg, #e0f0ff, #ffffff);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .phone {
+      width: 360px;
+      height: 640px;
+      background-color: #fff;
+      border-radius: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.13);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 22px;
+      box-sizing: border-box;
+      position: relative;
+      animation: fadeIn 0.6s cubic-bezier(.36,1.2,.47,.95);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .status-bar {
+      width: 92%;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      background: #111;
+      border-top-left-radius: 40px;
+      border-top-right-radius: 40px;
+      font-size: 15px;
+      color: #fff;
+      letter-spacing: 1px;
+      font-weight: 600;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      user-select: none;
+    }
+    .status-icons {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+    .main-content {
+      margin-top: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      flex: 1;
+      justify-content: center;
+    }
+    .title {
+      color: #0070f3;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 26px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    input {
+      width: 92%;
+      padding: 13px;
+      border-radius: 25px;
+      border: 1.5px solid #b5c9e3;
+      font-size: 16px;
+      outline: none;
+      margin-bottom: 18px;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    input:focus {
+      border-color: #0070f3;
+    }
+    .btn-score {
+      width: 92%;
+      padding: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #0070f3, #3ad29f);
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      margin-bottom: 18px;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0, 112, 243, 0.09);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-score:hover {
+      background: linear-gradient(90deg, #0057c0, #36c196);
+      transform: scale(1.02);
+    }
+    .result {
+      text-align: center;
+      margin-bottom: 18px;
+      font-size: 17px;
+      min-height: 24px;
+      color: #444;
+    }
+    .btn-nav {
+      background-color: #eee;
+      color: #222;
+      border: none;
+      width: 92%;
+      padding: 13px;
+      border-radius: 18px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: none;
+      margin-bottom: 10px;
+      transition: background 0.2s;
+    }
+    .btn-nav:hover {
+      background-color: #d6e2ef;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span id="currentTime">12:00</span>
+      <span class="status-icons">
+        <svg width="20" height="14" viewBox="0 0 20 14"><rect x="0" y="2" width="16" height="10" rx="2" fill="#fff"/><rect x="17" y="5" width="2" height="4" rx="1" fill="#aaa"/></svg>
+        <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="#fff" stroke-width="2"/><rect x="8" y="4" width="2" height="6" rx="1" fill="#fff"/></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="8" rx="2" fill="#fff"/><rect x="20" y="10" width="2" height="4" rx="1" fill="#aaa"/></svg>
+      </span>
+    </div>
+    <div class="main-content">
+      <div class="title">Consultar Score</div>
+      <input type="text" id="chavePix" placeholder="Digite a chave Pix" />
+      <button class="btn-score" onclick="consultar()">Consultar</button>
+      <div class="result" id="resultado"></div>
+      <button class="btn-nav" onclick="location.href='index.html'">Voltar ao Início</button>
+    </div>
+  </div>
+
+  <script>
+    // Barra de hora do celular
+    function updateClock() {
+      const now = new Date();
+      let h = String(now.getHours()).padStart(2, '0');
+      let m = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('currentTime').textContent = h + ':' + m;
+    }
+    updateClock();
+    setInterval(updateClock, 10000);
+
+    function consultar() {
+      const chave = document.getElementById('chavePix').value;
+      const resultado = document.getElementById('resultado');
+
+      fetch('http://localhost:8080/score/' + chave)
+        .then(response => {
+          if (!response.ok) throw new Error();
+          return response.text();
+        })
+        .then(score => {
+          resultado.innerHTML = `Score do usuário: <strong>${score}</strong>`;
+        })
+        .catch(() => {
+          resultado.innerHTML = "Usuário não encontrado ou erro na requisição.";
+        });
+    }
+  </script>
+</body>
+</html>

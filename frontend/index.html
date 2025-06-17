@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bra Bank - Início</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #d1e0ff, #ffffff);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .phone {
+      width: 360px;
+      height: 640px;
+      background: #fff;
+      border-radius: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.20);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      padding: 0 20px;
+    }
+    .status-bar {
+      width: 92%;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      background: #111;
+      border-top-left-radius: 40px;
+      border-top-right-radius: 40px;
+      font-size: 15px;
+      color: #fff;
+      letter-spacing: 1px;
+      font-weight: 600;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      user-select: none;
+    }
+    .status-icons {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+    .main-content {
+      margin-top: 55px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+    .app-title {
+      margin: 24px 0 32px 0;
+      color: #0070f3;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .menu-btn {
+      width: 90%;
+      padding: 16px;
+      margin-bottom: 18px;
+      font-size: 18px;
+      font-weight: 500;
+      background: linear-gradient(90deg, #0070f3, #3ad29f);
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      box-shadow: 0 3px 8px rgba(0, 112, 243, 0.07);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .menu-btn:hover {
+      background: linear-gradient(90deg, #0057c0, #3ad29f);
+      transform: scale(1.03);
+    }
+    .sair-btn {
+      width: 90%;
+      padding: 14px;
+      margin-bottom: 18px;
+      font-size: 18px;
+      font-weight: 500;
+      background-color: #ff4d4d;
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      box-shadow: 0 3px 8px rgba(255, 77, 77, 0.07);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .sair-btn:hover {
+      background-color: #e60000;
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span id="currentTime">12:00</span>
+      <span class="status-icons">
+        <svg width="20" height="14" viewBox="0 0 20 14"><rect x="0" y="2" width="16" height="10" rx="2" fill="#fff"/><rect x="17" y="5" width="2" height="4" rx="1" fill="#aaa"/></svg>
+        <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="#fff" stroke-width="2"/><rect x="8" y="4" width="2" height="6" rx="1" fill="#fff"/></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="8" rx="2" fill="#fff"/><rect x="20" y="10" width="2" height="4" rx="1" fill="#aaa"/></svg>
+      </span>
+    </div>
+    <div class="main-content">
+      <div class="app-title">Olá, seja bem-vindo ao<br>Bra Bank!</div>
+      <button class="menu-btn" onclick="location.href='score.html'">Consultar Score</button>
+      <button class="menu-btn" onclick="location.href='pix.html'">Área Pix</button>
+      <button class="menu-btn" onclick="location.href='denuncia.html'">Fazer Denúncia</button>
+      <button class="sair-btn" onclick="location.href='bra_bank_home.html'">Sair</button>
+    </div>
+  </div>
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('currentTime').textContent = h + ':' + m;
+    }
+    updateClock();
+    setInterval(updateClock, 10000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bra Bank</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(145deg, #e0f0ff, #ffffff);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .phone {
+      width: 360px;
+      height: 640px;
+      background-color: #ffffff;
+      border-radius: 44px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .status-bar {
+      width: 100%;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      background: #111;
+      border-top-left-radius: 44px;
+      border-top-right-radius: 44px;
+      font-size: 15px;
+      color: #fff;
+      letter-spacing: 1px;
+      font-weight: 600;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      user-select: none;
+    }
+    .status-icons {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+    img.logo {
+      width: 300px;
+      margin-top: 55px;
+    }
+    p {
+      color: #555;
+      font-size: 15px;
+      margin-top: 30px;
+      line-height: 1.5;
+      max-width: 280px;
+    }
+    .btn-login {
+      padding: 16px 28px;
+      font-size: 18px;
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      border-radius: 32px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 80%;
+      margin: 30px auto 10px;
+    }
+    .btn-login:hover {
+      background-color: #0059c1;
+    }
+    .btn-register {
+      padding: 14px 26px;
+      font-size: 17px;
+      background-color: #fff;
+      color: #0070f3;
+      border: 2px solid #0070f3;
+      border-radius: 32px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      width: 80%;
+      margin: 0 auto 18px auto;
+      font-weight: 600;
+    }
+    .btn-register:hover {
+      background-color: #f0f6ff;
+      color: #0059c1;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span id="currentTime">12:00</span>
+      <span class="status-icons">
+        <svg width="20" height="14" viewBox="0 0 20 14" style="vertical-align: middle;"><rect x="0" y="2" width="16" height="10" rx="2" fill="#fff"/><rect x="17" y="5" width="2" height="4" rx="1" fill="#aaa"/></svg>
+        <svg width="18" height="18" viewBox="0 0 18 18" style="vertical-align: middle;"><circle cx="9" cy="9" r="7" fill="none" stroke="#fff" stroke-width="2"/><rect x="8" y="4" width="2" height="6" rx="1" fill="#fff"/></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" style="vertical-align: middle;"><rect x="4" y="8" width="16" height="8" rx="2" fill="#fff"/><rect x="20" y="10" width="2" height="4" rx="1" fill="#aaa"/></svg>
+      </span>
+    </div>
+    <img src="logo-bra-bank.png" alt="Logo Bra Bank" class="logo" />
+    <p>Seu banco digital para consultar score,<br>enviar Pix e registrar denúncias.</p>
+    <button class="btn-login" onclick="location.href='login.html'">Login</button>
+    <button class="btn-register" onclick="location.href='registro.html'">Registrar-se</button>
+  </div>
+  <script>
+    // Atualiza o horário no status bar
+    function updateClock() {
+      const now = new Date();
+      let h = String(now.getHours()).padStart(2, '0');
+      let m = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('currentTime').textContent = h + ':' + m;
+    }
+    updateClock();
+    setInterval(updateClock, 10000);
+  </script>
+</body>
+</html>
