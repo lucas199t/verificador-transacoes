@@ -62,9 +62,14 @@ Pull Requests são bem-vindos! Para grandes mudanças, abra uma issue primeiro p
 
 ## ✉️ Contato
 Desenvolvido por **Lucas Henrique Pacheco Baiocco, Ronald Medeiros Mauro, Hugo Luiz Silva Carneiro**  
-[LinkedIn](https://www.linkedin.com/in/lucas-baiocco/)
-[LinkedIn](https://www.linkedin.com/in/ronald-medeiros-7136411bb/)
+Lucas - [LinkedIn](https://www.linkedin.com/in/lucas-baiocco/)
+
+Ronald - [LinkedIn](https://www.linkedin.com/in/ronald-medeiros-7136411bb/)
+
 Contatos: 
+
 lucashenriquepacheco2905@gmail.com
+
 ronald.medeiros.mauro2005@gmail.com
+
 hugo_scarneiro@outlook.com
